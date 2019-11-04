@@ -1,0 +1,43 @@
+<html>
+<head>
+	<title>Learn D3 in 5 minutes</title>
+</head>
+<body>
+
+<script src='https://d3js.org/d3.v4.min.js'></script>
+
+<script>
+	var r3 = 1.732051
+	var vis = d3.select("body").append("svg")
+		.attr("width", 1000)
+		.attr("height", 667),
+
+		scaleX = d3.scaleLinear()
+				.domain([-60,60])
+				.range([0,600]),
+
+		scaleY = d3.scaleLinear()
+				.domain([0,100])
+				.range([500,0]),
+
+		poly0 = [
+				{"x":0.0, "y":5.0 * r3},
+				{"x":5.0,"y":0.0},
+				{"x":15.0,"y":0.0},
+				{"x":20.0,"y":5.0 * r3},
+				{"x":15.0,"y":10.0 * r3},
+				{"x":5.0,"y":10.0 * r3}
+			];
+
+		vis.selectAll("polygon")
+				.data([poly0])
+				.enter().append("polygon")
+				.attr("points",function(d) { 
+					return d.map(function(d) { return [scaleX(d.x),scaleY(d.y)].join(","); }).join(" ");})
+				.attr("fill","red")
+				.attr("stroke","black")
+				.attr("stroke-width",2)
+</script>
+
+</body>
+</html>
